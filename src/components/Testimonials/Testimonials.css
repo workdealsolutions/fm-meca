@@ -31,7 +31,7 @@
 
 .testimonials-track {
   display: flex;
-  animation: scroll 60s linear infinite;
+  animation: scroll 45s linear infinite; /* Changed from 60s to 45s */
   width: fit-content;
 }
 
@@ -238,7 +238,33 @@
 
 @media (max-width: 768px) {
   .testimonials-card {
-    min-width: 300px;
+    min-width: 220px; /* Reduced from 260px */
+    padding: 1.2rem; /* Reduced from 1.5rem */
+    margin: 0 0.8rem; /* Reduced from 1rem */
+  }
+  
+  .testimonials-stars {
+    gap: 4px; /* Reduced gap */
+    margin-bottom: 1.5rem; /* Reduced margin */
+  }
+
+  .testimonials-star {
+    font-size: 1.1rem; /* Reduced from 1.3rem */
+  }
+
+  .testimonials-quote {
+    font-size: 0.9rem; /* Reduced from 1rem */
+    margin-bottom: 1.5rem; /* Reduced margin */
+    line-height: 1.6; /* Reduced line height */
+  }
+
+  .testimonials-client-name {
+    font-size: 1rem; /* Reduced from 1.1rem */
+  }
+
+  .testimonials-client-location,
+  .testimonials-project {
+    font-size: 0.85rem; /* Reduced from 0.95rem */
   }
   
   .testimonials-footer {
@@ -247,6 +273,14 @@
     gap: 1rem;
   }
 
+  .testimonials-quote {
+    font-size: 1rem; /* Smaller font size for quotes */
+  }
+
+  .testimonials-client-name {
+    font-size: 1.1rem; /* Smaller font size for names */
+  }
+  
   .testimonials-project {
     max-width: 100%;
     text-align: left;

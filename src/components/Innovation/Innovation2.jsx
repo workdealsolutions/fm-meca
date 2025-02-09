@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import Model2 from '../../Model2';
@@ -9,8 +9,19 @@ import Footer from '../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const Innovation2 = () => {
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark } = useTheme();
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleNavigation = (href) => {
     if (href.startsWith('#')) {
@@ -36,11 +47,14 @@ const Innovation2 = () => {
       >
         <div style={{ 
           width: '100%', 
-          height: 'calc(100vh - 140px)',
+          height: isMobile ? 'calc(100vh - 200px)' : 'calc(100vh - 140px)',
           position: 'relative'
         }}>
           <Canvas
-            camera={{ position: [-3, 4, 3], fov: 50 }}
+            camera={{ 
+              position: isMobile ? [-4, 5, 4] : [-3, 4, 3], 
+              fov: isMobile ? 60 : 50 
+            }}
             style={{ background: isDark ? '#000000' : '#ffffff' }}
             shadows
           >
@@ -59,15 +73,15 @@ const Innovation2 = () => {
                 castShadow
               />
               <Model2 
-                scale={[4, 4, 4]}
-                position={[-5, 0.1, 0]}
+                scale={isMobile ? [2.5, 2.5, 2.5] : [4, 4, 4]}
+                position={isMobile ? [-3, 0.1, 0] : [-5, 0.1, 0]}
               />
               <OrbitControls 
                 autoRotate
                 enableZoom={true}
-                enablePan={true}
-                minDistance={2}
-                maxDistance={10}
+                enablePan={isMobile ? false : true}
+                minDistance={isMobile ? 3 : 2}
+                maxDistance={isMobile ? 8 : 10}
               />
               <Environment preset="studio" intensity={2.0} />
               <gridHelper args={[20, 40]} position={[0, -0.01, 0]} />

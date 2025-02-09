@@ -60,7 +60,7 @@ const Navbar = ({ onNavigate, currentSection }) => {
         <motion.a 
           href="#home" 
           className="logo"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}  // Reduced scale effect
           transition={{ type: "spring", stiffness: 400 }}
         >
           <img src="/jpg_to_png-removebg-preview.png" alt="FM MECA" />
@@ -82,7 +82,8 @@ const Navbar = ({ onNavigate, currentSection }) => {
             window.innerWidth <= 768  // Only animate on mobile
               ? { 
                   x: isOpen ? 0 : "100%",
-                  opacity: isOpen ? 1 : 0 
+                  opacity: isOpen ? 1 : 0,
+                  transition: { duration: 0.2 }  // Faster transition
                 }
               : { opacity: 1, x: 0 }
           }
@@ -125,7 +126,7 @@ const Navbar = ({ onNavigate, currentSection }) => {
           style={{ width: `${scrollProgress}%` }}
           initial={{ width: 0 }}
           animate={{ width: `${scrollProgress}%` }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}  // Faster transition
         />
       </div>
     </nav>

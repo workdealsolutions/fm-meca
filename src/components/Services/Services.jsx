@@ -119,7 +119,7 @@ const Services = () => {
   };
 
   return (
-    <section className="services" style={{ background: themeStyles.background }}>
+    <section className="services" style={{ background: themeStyles.background, paddingTop: '4rem' }}> {/* Reduced padding */}
       <div className="services-content">
         <div className="services-section-title">
           <motion.h1 

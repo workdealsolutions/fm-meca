@@ -5,7 +5,6 @@ import Model2 from '../../Model2';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const Innovation2 = () => {
@@ -100,8 +99,6 @@ const Innovation2 = () => {
           </Canvas>
         </div>
       </motion.div>
-      
-      <Footer />
     </div>
   );
 };

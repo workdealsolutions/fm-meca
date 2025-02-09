@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './Partners.css';
 import { useTheme } from '../../context/ThemeContext';
@@ -6,7 +6,17 @@ import { useTheme } from '../../context/ThemeContext';
 const Partners = () => {
   const { isDark } = useTheme();
   const scrollRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const partners = [
     { 
       name: 'ABBK Physicsworks', 
@@ -72,12 +82,12 @@ const Partners = () => {
       const itemWidth = items[0].offsetWidth;
       const scrollWidth = scrollContent.scrollWidth;
       
-      // Remove existing clones
       const existingClones = scrollContent.querySelectorAll('.clone');
       existingClones.forEach(clone => clone.remove());
 
-      // Add new clones until we have enough to ensure continuous scrolling
-      while (scrollContent.scrollWidth < scrollWidth * 2) {
+      // Adjust number of clones based on screen size
+      const multiplier = isMobile ? 3 : 2;
+      while (scrollContent.scrollWidth < scrollWidth * multiplier) {
         Array.from(items).slice(0, partners.length).forEach(item => {
           const clone = item.cloneNode(true);
           clone.classList.add('clone');
@@ -89,7 +99,7 @@ const Partners = () => {
     cloneItems();
     window.addEventListener('resize', cloneItems);
     return () => window.removeEventListener('resize', cloneItems);
-  }, [partners.length]);
+  }, [partners.length, isMobile]);
 
   return (
     <section 

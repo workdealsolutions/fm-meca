@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import Model from '../../Model';
@@ -11,17 +11,6 @@ import { useNavigate } from 'react-router-dom';
 const Innovation = () => {
   const { isDark } = useTheme();
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handleNavigation = (href) => {
     if (href.startsWith('#')) {
@@ -30,13 +19,7 @@ const Innovation = () => {
   };
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      display: 'flex', 
-      flexDirection: 'column',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar onNavigate={handleNavigation} />
       
       <motion.div
@@ -49,16 +32,15 @@ const Innovation = () => {
           width: '100%',
           position: 'relative',
           background: isDark ? '#000000' : '#ffffff',
-          marginBottom: '60px' // Add space for footer
         }}
       >
         <div style={{ 
           width: '100%', 
-          height: isMobile ? '60vh' : 'calc(100vh - 140px)',
+          height: 'calc(100vh - 140px)',
           position: 'relative'
         }}>
           <Canvas
-            camera={{ position: [5, 5, 5], fov: isMobile ? 60 : 45 }}
+            camera={{ position: [5, 5, 5], fov: 45 }}
             style={{ 
               background: isDark ? '#000000' : '#ffffff',
               position: 'absolute',
@@ -84,7 +66,7 @@ const Innovation = () => {
                 castShadow
               />
               <Model 
-                scale={isMobile ? [3, 3, 3] : [5, 5, 5]}
+                scale={[5, 5, 5]}
                 position={[0, 0, 0]}
                 rotation={[0, Math.PI / 4, 0]}
               />
@@ -92,8 +74,8 @@ const Innovation = () => {
                 autoRotate
                 enableZoom={true}
                 enablePan={true}
-                minDistance={isMobile ? 1 : 2}
-                maxDistance={isMobile ? 10 : 15}
+                minDistance={2}
+                maxDistance={15}
               />
               <Environment preset="warehouse" intensity={1.5} />
               <gridHelper args={[20, 40]} position={[0, -0.01, 0]} />
@@ -102,15 +84,7 @@ const Innovation = () => {
         </div>
       </motion.div>
       
-      <div style={{
-        position: 'fixed',
-        bottom: 0,
-        width: '100%',
-        backgroundColor: isDark ? '#000000' : '#ffffff',
-        zIndex: 10
-      }}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

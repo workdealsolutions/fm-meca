@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import Model from '../../Model';
@@ -11,6 +11,17 @@ import { useNavigate } from 'react-router-dom';
 const Innovation = () => {
   const { isDark } = useTheme();
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleNavigation = (href) => {
     if (href.startsWith('#')) {
@@ -36,11 +47,14 @@ const Innovation = () => {
       >
         <div style={{ 
           width: '100%', 
-          height: 'calc(100vh - 140px)',
+          height: isMobile ? 'calc(100vh - 200px)' : 'calc(100vh - 140px)',
           position: 'relative'
         }}>
           <Canvas
-            camera={{ position: [5, 5, 5], fov: 45 }}
+            camera={{ 
+              position: isMobile ? [7, 7, 7] : [5, 5, 5], 
+              fov: isMobile ? 60 : 45 
+            }}
             style={{ 
               background: isDark ? '#000000' : '#ffffff',
               position: 'absolute',
@@ -66,16 +80,16 @@ const Innovation = () => {
                 castShadow
               />
               <Model 
-                scale={[5, 5, 5]}
-                position={[0, 0, 0]}
+                scale={isMobile ? [3, 3, 3] : [5, 5, 5]}
+                position={isMobile ? [0, -1, 0] : [0, 0, 0]}
                 rotation={[0, Math.PI / 4, 0]}
               />
               <OrbitControls 
                 autoRotate
                 enableZoom={true}
-                enablePan={true}
-                minDistance={2}
-                maxDistance={15}
+                enablePan={isMobile ? false : true}
+                minDistance={isMobile ? 4 : 2}
+                maxDistance={isMobile ? 10 : 15}
               />
               <Environment preset="warehouse" intensity={1.5} />
               <gridHelper args={[20, 40]} position={[0, -0.01, 0]} />

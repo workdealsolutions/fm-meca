@@ -14,10 +14,21 @@ import Model from './Model';
 import { ThemeProvider } from './context/ThemeContext';
 import './styles/theme.css';
 import Model2 from './Model2'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Innovation from './components/Innovation/Innovation';
 import Innovation2 from './components/Innovation/Innovation2';
 import Partners from './components/Partners/Partners';
+
+// Add ScrollToTop component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,6 +79,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/innovation" element={<Innovation />} />
           <Route path="/innovation2" element={<Innovation2 />} />

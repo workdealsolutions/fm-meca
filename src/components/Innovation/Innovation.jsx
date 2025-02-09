@@ -23,6 +23,11 @@ const Innovation = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleNavigation = (href) => {
     if (href.startsWith('#')) {
       navigate('/' + href);
@@ -30,7 +35,13 @@ const Innovation = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column',
+      position: 'relative',
+      top: 0
+    }}>
       <Navbar onNavigate={handleNavigation} />
       
       <motion.div

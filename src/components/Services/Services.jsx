@@ -114,7 +114,7 @@ const Services = () => {
   const { title, services, exploreButton } = translations[language].servicesSection;
 
   const handleExploreClick = (index) => {
-    setSelectedModel(index === 0 ? 'model1' : 'model2');
+    setSelectedModel(index === 0 ? 'model1' : index === 1 ? 'model2' : 'model3');
     setModalOpen(true);
   };
 

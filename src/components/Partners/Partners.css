@@ -44,16 +44,16 @@
   display: inline-flex;
   gap: 1.5rem;  /* Reduced from 3rem */
   padding: 0 1rem;  /* Reduced from 2rem */
-  animation: scroll 80s linear infinite;
+  animation: scroll 40s linear infinite;
   white-space: nowrap;
 }
 
 @keyframes scroll {
-  from {
+  0% {
     transform: translateX(0);
   }
-  to {
-    transform: translateX(calc(-50%));
+  100% {
+    transform: translateX(-50%);
   }
 }
 
@@ -109,7 +109,7 @@
 
   .scroll-content {
     gap: 0.8rem;
-    animation: scroll 40s linear infinite; /* Faster animation for mobile */
+    animation: scroll 40s linear infinite; /* Same speed as desktop */
   }
 
   .partner-logo {

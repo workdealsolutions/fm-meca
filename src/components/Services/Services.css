@@ -11,9 +11,6 @@
   font-family: "Roboto", sans-serif;
   position: relative;
   overflow: hidden;
-  transform: translateZ(0);
-  will-change: transform;
-  contain: content;
 }
 
 .services::before {
@@ -77,9 +74,8 @@
   gap: 4rem;
   color: red;
   transition: color 0.3s ease;
-  will-change: transform, opacity; /* Add will-change */
+  will-change: transform; /* Add will-change */
   transform: translateZ(0); /* Force GPU acceleration */
-  contain: layout style;
 }
 
 .service-item:hover {
@@ -89,16 +85,6 @@
 .service-item:nth-child(even) {
   flex-direction: row-reverse;
   color: red;
-}
-
-.service-item:nth-child(3) .service-image {
-  max-width: 80%;
-  margin: 0 auto;
-}
-
-.service-item:nth-child(3) .service-image img {
-  max-height: 400px;
-  object-fit: contain;
 }
 
 .service-card {
@@ -122,9 +108,8 @@
   flex-direction: column;
   gap: 2rem;
   transform: translateZ(0); /* Force GPU acceleration */
-  will-change: transform; /* Add will-change */
+  will-change: transform, opacity; /* Add will-change */
   backface-visibility: hidden; /* Optimize transforms */
-  contain: layout style;
 }
 
 .service-card::before {
@@ -162,7 +147,7 @@
 }
 
 .service-card:hover {
-  transform: translate3d(0, -15px, 0) scale3d(1.02, 1.02, 1);
+  transform: translateY(-15px) scale(1.02);
   background: linear-gradient(165deg, 
     rgba(50, 50, 50, 0.95) 0%,
     rgba(30, 30, 30, 0.95) 50%,
@@ -309,8 +294,6 @@
   transform: translateZ(0); /* Force GPU acceleration */
   will-change: transform; /* Add will-change */
   backface-visibility: hidden; /* Optimize transforms */
-  contain: layout style;
-  perspective: 1000px;
 }
 
 .service-image img {
@@ -318,9 +301,6 @@
   height: 100%;
   object-fit: cover;
   transition: all 0.5s ease;
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
 }
 
 .service-image:hover img {
@@ -380,15 +360,6 @@
   .services-list {
     gap: 2rem; /* Reduced gap further on mobile */
   }
-
-  .service-item {
-    contain: strict;
-    will-change: auto;
-  }
-  
-  .service-card:hover {
-    transform: translate3d(0, -5px, 0) scale3d(1.01, 1.01, 1);
-  }
 }
 
 @keyframes rotate {
@@ -410,8 +381,7 @@
 @media (prefers-reduced-motion: reduce) {
   .service-card,
   .service-image,
-  .service-button,
-  .service-item {
+  .service-button {
     transition: none !important;
     animation: none !important;
     transform: none !important;
@@ -475,9 +445,5 @@
   .title-line {
     width: 60px;
   }
-}
-
-.service-item, .service-card, .service-image {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

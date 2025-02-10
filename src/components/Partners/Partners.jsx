@@ -45,13 +45,11 @@ const Partners = () => {
     },
     { 
       name: 'Markabte', 
-      logo: '/logos/markabte.png',
-      isLight: false 
+      isText: true
     },
     { 
       name: 'SIP', 
-      logo: '/logos/sip.png',
-      isLight: false 
+      isText: true
     },
     { 
       name: 'Phoenixmicron', 
@@ -126,20 +124,31 @@ const Partners = () => {
                   background: 'transparent',
                 }}
               >
-                <img 
-                  src={partner.logo} 
-                  alt={partner.name}
-                  style={{
-                    filter: partner.isLight
-                      ? isDark
-                        ? 'brightness(1)' // Light logo in dark mode
-                        : 'brightness(0.1)' // Light logo in light mode
-                      : isDark
-                        ? 'brightness(2) invert(1)' // Dark logo in dark mode
-                        : 'brightness(1)' // Dark logo in light mode
-                  }}
-                  className="partner-logo"
-                />
+                {partner.isText ? (
+                  <span style={{
+                    fontSize: '2rem',
+                    fontWeight: 'bold',
+                    color: isDark ? '#ffffff' : '#000000',
+                    fontFamily: 'Poppins, sans-serif'
+                  }}>
+                    {partner.name}
+                  </span>
+                ) : (
+                  <img 
+                    src={partner.logo} 
+                    alt={partner.name}
+                    style={{
+                      filter: partner.isLight
+                        ? isDark
+                          ? 'brightness(1)' // Light logo in dark mode
+                          : 'brightness(0.1)' // Light logo in light mode
+                        : isDark
+                          ? 'brightness(2) invert(1)' // Dark logo in dark mode
+                          : 'brightness(1)' // Dark logo in light mode
+                    }}
+                    className="partner-logo"
+                  />
+                )}
               </div>
             ))}
           </div>

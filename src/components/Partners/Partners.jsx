@@ -75,29 +75,19 @@ const Partners = () => {
     const scrollContent = scrollRef.current;
     if (!scrollContent) return;
 
-    const cloneItems = () => {
-      const items = scrollContent.children;
-      const itemWidth = items[0].offsetWidth;
-      const scrollWidth = scrollContent.scrollWidth;
-      
-      const existingClones = scrollContent.querySelectorAll('.clone');
-      existingClones.forEach(clone => clone.remove());
+    // Create exactly one copy of the partners for smooth infinite scroll
+    const items = Array.from(scrollContent.children).slice(0, partners.length);
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.classList.add('clone');
+      scrollContent.appendChild(clone);
+    });
 
-      // Adjust number of clones based on screen size
-      const multiplier = isMobile ? 3 : 2;
-      while (scrollContent.scrollWidth < scrollWidth * multiplier) {
-        Array.from(items).slice(0, partners.length).forEach(item => {
-          const clone = item.cloneNode(true);
-          clone.classList.add('clone');
-          scrollContent.appendChild(clone);
-        });
-      }
+    return () => {
+      const clones = scrollContent.querySelectorAll('.clone');
+      clones.forEach(clone => clone.remove());
     };
-
-    cloneItems();
-    window.addEventListener('resize', cloneItems);
-    return () => window.removeEventListener('resize', cloneItems);
-  }, [partners.length, isMobile]);
+  }, [partners.length]);
 
   return (
     <section 

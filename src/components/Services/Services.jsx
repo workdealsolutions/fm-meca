@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -36,19 +36,21 @@ const TypeWriter = ({ text, delay = 50 }) => {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    transform: 'translate3d(0, 30px, 0)',
-    filter: 'blur(2px)'
+    y: 50, // Reduced from 100
+    scale: 0.95, // Changed from 0.9
+    filter: 'blur(4px)' // Reduced blur amount
   },
   visible: index => ({
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
+    y: 0,
+    scale: 1,
     filter: 'blur(0px)',
     transition: {
       type: "spring",
-      mass: 0.8,
-      damping: 20,
-      stiffness: 100,
-      delay: index * 0.1
+      damping: 25,
+      stiffness: 200,
+      delay: index * 0.1, // Reduced delay
+      duration: 0.5, // Reduced duration
     }
   })
 };
@@ -124,13 +126,14 @@ const Services = () => {
   };
 
   return (
-    <section className="services" style={{ background: themeStyles.background }}>
+    <section className="services" style={{ background: themeStyles.background, paddingTop: '4rem' }}> {/* Reduced padding */}
       <div className="services-content">
+        {/* Replace current title animations with simpler ones */}
         <motion.div 
           className="services-section-title"
-          initial={{ opacity: 0, transform: 'translate3d(0, -20px, 0)' }}
-          whileInView={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <motion.h1 
             className="section-title-main"
@@ -188,16 +191,16 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className={`service-item ${index === 2 ? 'service-item-small' : ''}`}
-              variants={cardVariants}
+              className="service-item"
+              style={{ 
+                color: themeStyles.accentColor,
+                willChange: 'transform, opacity' // Add will-change for performance
+              }}
               initial="hidden"
               whileInView="visible"
+              viewport={{ margin: "-50px", once: true }} // Reduced margin and added once
+              variants={cardVariants}
               custom={index}
-              viewport={{ once: true, margin: "-50px" }}
-              style={{ 
-                willChange: 'transform, opacity',
-                transform: 'translate3d(0, 0, 0)'
-              }}
             >
               <motion.div 
                 className="service-card"
@@ -303,5 +306,5 @@ const Services = () => {
   );
 };
 
-export default React.memo(Services);
+export default Services;
 

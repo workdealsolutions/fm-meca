@@ -237,6 +237,12 @@
 }
 
 @media (max-width: 768px) {
+  .testimonials-title {
+    font-size: 1.5rem;  /* Reduced from 2rem */
+    margin-bottom: 1.5rem;  /* Reduced from 2rem */
+    letter-spacing: 1px;  /* Reduced from 2px */
+  }
+
   .testimonials-card {
     min-width: 220px; /* Reduced from 260px */
     padding: 1.2rem; /* Reduced from 1.5rem */

@@ -10,13 +10,9 @@ import Cursor from './components/Cursor/Cursor';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment } from '@react-three/drei'
-import Model from './Model';
 import { ThemeProvider } from './context/ThemeContext';
 import './styles/theme.css';
-import Model2 from './Model2'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Innovation from './components/Innovation/Innovation';
-import Innovation2 from './components/Innovation/Innovation2';
 import Partners from './components/Partners/Partners';
 
 // Add ScrollToTop component
@@ -81,8 +77,6 @@ const App = () => {
       <Router>
         <ScrollToTop />
         <Routes>
-          <Route path="/innovation" element={<Innovation />} />
-          <Route path="/innovation2" element={<Innovation2 />} />
           <Route path="/" element={
             <div className="App">
               <LoadingScreen isLoading={isLoading} />

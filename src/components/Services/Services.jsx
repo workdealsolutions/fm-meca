@@ -268,7 +268,7 @@ const Services = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <img 
-                  src={index === 0 ? "pics.jpg" : index === 1 ? "pic.jpg" : "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1080,h=883,fit=crop,trim=0;0;16.778985507246375;0/YlenyqBkyesbG2vB/mechanical-sealing.36-mP4ZMBGkJksywGZp.png"} 
+                  src={index === 0 ? "pics.jpg" : index === 1 ? "pic.jpg" : "https://i.pinimg.com/736x/5b/eb/3f/5beb3f51580397c8349a18bbec9c170c.jpg"} 
                   alt={service.title} 
                 />
               </motion.div>

@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiArrowUpRight } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -8,9 +8,6 @@ import './Footer.css';
 const Footer = () => {
   const { isDark } = useTheme();
   const { language, translations } = useLanguage();
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
-  const y = useTransform(scrollYProgress, [0.8, 1], [100, 0]);
 
   const contactInfo = [
     {
@@ -33,33 +30,16 @@ const Footer = () => {
   const services = translations[language].services;
 
   return (
-    <motion.footer 
-      className="footer"
-      style={{ 
-        opacity, 
-        background: '#000000', // Keep footer always dark
-        color: '#ffffff'
-      }}
-    >
+    <footer className="footer">
       <div className={`footer-container ${isDark ? 'dark' : 'light'}`}>
-        <motion.div 
-          className="footer-section brand-section"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        <div className="footer-section brand-section">
           <img src="/jpg_to_png-removebg-preview.png" alt="FM MECA" className="footer-logo" />
           <h3 className="modern-text">FM MECA</h3>
           <p className="subtitle">FM MECA is an engineering consulting agency with a team of experts in manufacturing engineering, custom machinery design, and technical documents management. We pride ourselves on building long-term relationships with clients and providing them with the support and guidance they need to succeed.</p>
           <LanguageToggle />
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="footer-section"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        <div className="footer-section">
           <h4 className="section-title">{translations[language].contactInfo}</h4>
           <ul className="contact-info">
             {contactInfo.map((item, index) => (
@@ -93,14 +73,9 @@ const Footer = () => {
               </motion.li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="footer-section"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        <div className="footer-section">
           <h4 className="section-title">{translations[language].ourServices}</h4>
           <ul className="services-list">
             {services.map((service, index) => (
@@ -120,20 +95,15 @@ const Footer = () => {
               </motion.li>
             ))}
           </ul>
-        </motion.div>
+        </div>
       </div>
 
-      <motion.div 
-        className="footer-bottom glass-effect"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
+      <div className="footer-bottom glass-effect">
         <div className="footer-bottom-content">
           <p>© {new Date().getFullYear()} FM MECA. {translations[language].rights}</p>
         </div>
-      </motion.div>
-    </motion.footer>
+      </div>
+    </footer>
   );
 };
 

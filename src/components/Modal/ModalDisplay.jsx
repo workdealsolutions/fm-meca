@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, Grid } from '@react-three/drei';
 import Model from '../../Model';
 import Model2 from '../../Model2';
+import Model3 from '../../Model3';  // Add this import
 
 const Modal = ({ isOpen, onClose, modelType }) => {
   if (!isOpen) return null;
@@ -65,10 +66,16 @@ const Modal = ({ isOpen, onClose, modelType }) => {
                 position={[0, 0, 0]}
                 rotation={[0, Math.PI / 4, 0]}
               />
-            ) : (
+            ) : modelType === 'model2' ? (
               <Model2
                 scale={[15, 15, 15]}
                 position={[-3, 0, -3]}
+                rotation={[0, Math.PI / 4, 0]}
+              />
+            ) : (
+              <Model3
+                scale={[1, 1, 1]}
+                position={[0, 0, 0]}
                 rotation={[0, Math.PI / 4, 0]}
               />
             )}
@@ -157,3 +164,4 @@ const Modal = ({ isOpen, onClose, modelType }) => {
 };
 
 export default Modal;
+

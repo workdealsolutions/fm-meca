@@ -124,13 +124,12 @@ const Services = () => {
   };
 
   return (
-    <section className="services" ref={ref} style={{ background: themeStyles.background }}>
+    <section className="services" style={{ background: themeStyles.background }}>
       <div className="services-content">
         <motion.div 
           className="services-section-title"
           initial={{ opacity: 0, transform: 'translate3d(0, -20px, 0)' }}
           whileInView={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
-          viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
           <motion.h1 
@@ -171,9 +170,17 @@ const Services = () => {
             WebkitTextFillColor: 'transparent'
           }}
           initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          animate={controls}
+          variants={{
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1.2,
+                ease: "easeOut"
+              }
+            }
+          }}
         >
           {title}
         </motion.h2>
@@ -185,8 +192,8 @@ const Services = () => {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
               custom={index}
+              viewport={{ once: true, margin: "-50px" }}
               style={{ 
                 willChange: 'transform, opacity',
                 transform: 'translate3d(0, 0, 0)'

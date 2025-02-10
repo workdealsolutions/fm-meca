@@ -311,7 +311,7 @@ body {
     }
 
     .nav-links li:first-child {
-        margin-top: 0; /* Remove top margin from first item */
+        margin-top: 15px; /* Remove top margin from first item */
     }
 
     .nav-links li {

@@ -15,15 +15,18 @@ const Footer = () => {
   const contactInfo = [
     {
       icon: <FiMapPin />,
-      text: '20 Mars IM AOUN AP501, SOUSSE 4000 - Tunisia'
+      text: '20 Mars IM AOUN AP501, SOUSSE 4000 - Tunisia',
+      link: 'https://www.google.com/maps/search/?api=1&query=35.83145383768949+10.62516113902816'
     },
     {
       icon: <FiPhone />,
-      text: '(+216) 50600465'
+      text: '(+216) 50600465',
+      link: 'https://wa.me/21650600465'
     },
     {
       icon: <FiMail />,
-      text: 'Contact@fmmeca.com'
+      text: 'Contact@fmmeca.com',
+      link: 'mailto:Contact@fmmeca.com'
     }
   ];
 
@@ -34,7 +37,6 @@ const Footer = () => {
       className="footer"
       style={{ 
         opacity, 
-        y,
         background: '#000000', // Keep footer always dark
         color: '#ffffff'
       }}
@@ -75,7 +77,19 @@ const Footer = () => {
                   className="icon"
                   whileHover={{ rotate: 15, scale: 1.2 }}
                 >{item.icon}</motion.span>
-                <span className="text">{item.text}</span>
+                {item.link ? (
+                  <a 
+                    href={item.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text"
+                    style={{ color: 'inherit', textDecoration: 'none' }}
+                  >
+                    {item.text}
+                  </a>
+                ) : (
+                  <span className="text">{item.text}</span>
+                )}
               </motion.li>
             ))}
           </ul>

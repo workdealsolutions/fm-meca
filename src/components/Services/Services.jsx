@@ -72,7 +72,7 @@ const Services = () => {
     textColor: isDark ? '#ffffff' : '#000000',
     cardBg: isDark 
       ? 'linear-gradient(165deg, rgba(40, 40, 40, 0.95), rgba(10, 10, 10, 0.98))'
-      : 'linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.98))',
+      : 'linear-gradient(165deg, rgba(240, 240, 240, 0.95), rgba(220, 220, 220, 0.98))',
     cardBorder: isDark 
       ? 'rgba(255, 255, 255, 0.1)'
       : 'rgba(0, 0, 0, 0.1)',

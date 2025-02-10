@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -36,23 +36,19 @@ const TypeWriter = ({ text, delay = 50 }) => {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
-    scale: 0.9,
-    rotateX: -10,
-    filter: 'blur(10px)'
+    transform: 'translate3d(0, 30px, 0)',
+    filter: 'blur(2px)'
   },
   visible: index => ({
     opacity: 1,
-    y: 0,
-    scale: 1,
-    rotateX: 0,
+    transform: 'translate3d(0, 0, 0)',
     filter: 'blur(0px)',
     transition: {
       type: "spring",
+      mass: 0.8,
       damping: 20,
       stiffness: 100,
-      delay: index * 0.2,
-      duration: 0.8,
+      delay: index * 0.1
     }
   })
 };
@@ -104,11 +100,20 @@ const Services = () => {
       : 'rgba(0, 0, 0, 0.7)',
   };
 
+  // Add this for performance optimization
+  const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Optimized animation controls
   useEffect(() => {
     if (inView) {
-      controls.start("visible")
+      controls.start("visible", {
+        transition: {
+          staggerChildren: shouldReduceMotion ? 0 : 0.1,
+          delayChildren: shouldReduceMotion ? 0 : 0.2
+        }
+      });
     }
-  }, [controls, inView])
+  }, [controls, inView]);
 
   const serviceIcons = [<FiSettings />, <FiBox />, <FiFileText />];
   const { title, services, exploreButton } = translations[language].servicesSection;
@@ -119,9 +124,15 @@ const Services = () => {
   };
 
   return (
-    <section className="services" style={{ background: themeStyles.background, paddingTop: '4rem' }}> {/* Reduced padding */}
+    <section className="services" ref={ref} style={{ background: themeStyles.background }}>
       <div className="services-content">
-        <div className="services-section-title">
+        <motion.div 
+          className="services-section-title"
+          initial={{ opacity: 0, transform: 'translate3d(0, -20px, 0)' }}
+          whileInView={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+        >
           <motion.h1 
             className="section-title-main"
             style={{
@@ -149,7 +160,7 @@ const Services = () => {
             whileInView={{ width: "100px", opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           />
-        </div>
+        </motion.div>
 
         <motion.h2
           className="services-title"
@@ -160,17 +171,9 @@ const Services = () => {
             WebkitTextFillColor: 'transparent'
           }}
           initial={{ opacity: 0, y: -50 }}
-          animate={controls}
-          variants={{
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                duration: 1.2,
-                ease: "easeOut"
-              }
-            }
-          }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
           {title}
         </motion.h2>
@@ -178,8 +181,16 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="service-item"
-              style={{ color: themeStyles.accentColor }}
+              className={`service-item ${index === 2 ? 'service-item-small' : ''}`}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              custom={index}
+              style={{ 
+                willChange: 'transform, opacity',
+                transform: 'translate3d(0, 0, 0)'
+              }}
             >
               <motion.div 
                 className="service-card"
@@ -285,5 +296,5 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default React.memo(Services);
 

@@ -4,6 +4,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { FiSettings, FiBox, FiFileText } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal/ModalDisplay';
 import "./Services.css";
 
 
@@ -63,6 +64,8 @@ const Services = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, threshold: 0.2 });
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(null);
 
   const themeStyles = {
     background: isDark 
@@ -111,11 +114,8 @@ const Services = () => {
   const { title, services, exploreButton } = translations[language].servicesSection;
 
   const handleExploreClick = (index) => {
-    if (index === 0) {
-      navigate('/innovation');
-    } else if (index === 1) {
-      navigate('/innovation2');
-    }
+    setSelectedModel(index === 0 ? 'model1' : 'model2');
+    setModalOpen(true);
   };
 
   return (
@@ -276,6 +276,11 @@ const Services = () => {
           ))}
         </div>
       </div>
+      <Modal 
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        modelType={selectedModel}
+      />
     </section>
   );
 };

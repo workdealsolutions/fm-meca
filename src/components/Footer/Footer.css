@@ -21,52 +21,6 @@
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 0, 0, 0.8),
-        rgba(255, 0, 0, 0.2),
-        transparent
-    );
-    animation: slidingGoldBorder 8s linear infinite;
-    z-index: -1;
-}
-
-.footer::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -100%;
-    width: 50%;
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 0, 0, 0.8),
-        rgba(255, 0, 0, 0.2),
-        transparent
-    );
-    animation: slidingGoldBorder 8s linear infinite;
-    animation-delay: 4s;
-    z-index: -1;
-}
-
-@keyframes slidingGoldBorder {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 100%;
-    }
-}
-
 .glass-effect {
     background: linear-gradient(145deg, #000000, #0A0A0A);
     border: 1px solid rgba(255, 0, 0, 0.1);

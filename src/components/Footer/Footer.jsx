@@ -84,9 +84,9 @@ const Footer = () => {
                 className="service-item"
                 whileHover={{ 
                   x: 15,
-                  color: '#FF0000',
+                  color: 'rgb(88, 73, 73)',
                   scale: 1.02,
-                  backgroundColor: "rgba(255, 0, 0, 0.05)",
+                  backgroundColor: "rgba(88, 73, 73, 0.05)",
                 }}
                 whileTap={{ scale: 0.98 }}
               >

@@ -94,7 +94,7 @@ const Partners = () => {
       id="partners" 
       className="partners-section"
       style={{
-        background: isDark ? '#8a817c' : '#f5f5f5',
+        background: isDark ? '#111111' : '#f5f5f5',
       }}
     >
       <h2 className="partners-section-title" style={{ color: isDark ? '#ffffff' : '#000000' }}>

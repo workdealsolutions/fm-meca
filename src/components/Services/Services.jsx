@@ -82,18 +82,18 @@ const Services = () => {
     titleGradient: isDark
       ? 'linear-gradient(135deg, #000000, rgba(255, 255, 255, 0.7))'
       : 'linear-gradient(135deg, #000000, rgba(0, 0, 0, 0.8))',
-    accentColor: isDark ? '#ff4444' : '#cc0000',
+    accentColor: isDark ? '#ff4444' : 'rgb(88, 73, 73)',
     titleColor: isDark ? '#ffffff' : '#000000',
     cardTitle: isDark ? '#ffffff' : '#000000', // This line ensures black color in light mode
     titleUnderline: isDark 
       ? 'linear-gradient(90deg, #ffffff, transparent)'
-      : 'linear-gradient(90deg, #cc0000, transparent)',
+      : 'linear-gradient(90deg, rgb(88, 73, 73), transparent)',
     descriptionColor: isDark 
       ? 'rgba(255, 255, 255, 0.7)' 
       : 'rgba(70, 70, 70, 0.9)',
     borderColor: isDark
       ? 'rgba(255, 255, 255, 0.1)'
-      : '#cc0000',
+      : 'rgb(88, 73, 73)',
     titleAfter: isDark 
       ? 'linear-gradient(90deg, #000000, transparent)'
       : 'linear-gradient(90deg, #000000, transparent)',
@@ -257,10 +257,11 @@ const Services = () => {
                     color: themeStyles.textColor,
                     borderColor: themeStyles.cardBorder
                   }}
-                  whileHover={{
-                    scale: 1.05,
-                    color: themeStyles.accentColor,
-                    borderColor: themeStyles.accentColor
+                  whileHover={{ 
+                    x: 15,
+                    color: 'rgb(88, 73, 73)',
+                    scale: 1.02,
+                    backgroundColor: "rgba(88, 73, 73, 0.05)",
                   }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0.9 }}

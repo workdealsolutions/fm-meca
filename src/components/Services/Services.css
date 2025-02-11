@@ -65,26 +65,26 @@
   display: flex;
   flex-direction: column;
   gap: 4rem; /* Reduced from 6rem to 4rem */
-  color: red;
+  color: rgb(88, 73, 73);
 }
 
 .service-item {
   display: flex;
   align-items: center;
   gap: 4rem;
-  color: red;
+  color: rgb(88, 73, 73);
   transition: color 0.3s ease;
   will-change: transform; /* Add will-change */
   transform: translateZ(0); /* Force GPU acceleration */
 }
 
 .service-item:hover {
-  color: darkred;
+  color: rgb(88, 73, 73);
 }
 
 .service-item:nth-child(even) {
   flex-direction: row-reverse;
-  color: red;
+  color: rgb(88, 73, 73);
 }
 
 .service-card {
@@ -436,7 +436,7 @@
   transform: translateX(-50%);
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgb(139,0,0), transparent);
+  background: linear-gradient(90deg, transparent, rgb(88, 73, 73), transparent);
 }
 
 @media (max-width: 768px) {

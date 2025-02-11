@@ -126,7 +126,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgb(139,0,0,0.4),
+    rgb(88, 73, 73, 0.4),
     transparent
   );
   animation: shimmer 3s infinite;
@@ -271,7 +271,7 @@ body {
   background: linear-gradient(
     45deg,
     transparent 0%,
-    rgb(139,0,0) 50%,
+    rgb(88, 73, 73) 50%,
     transparent 100%
   );
   transform: translateX(-100%);
@@ -344,11 +344,11 @@ body {
   backdrop-filter: blur(10px);
   border-radius: 25px;
   padding: 3.5rem; /* increased padding */
-  border: 1px solid rgb(139,0,0);
+  border: 1px solid rgb(88, 73, 73);
   box-shadow: 
-    0 20px 40px rgb(139,0,0),
-    0 1px 3px rgb(139,0,0),
-    inset 0 1px 1px rgb(139,0,0);
+    0 20px 40px rgb(88, 73, 73),
+    0 1px 3px rgb(88, 73, 73),
+    inset 0 1px 1px rgb(88, 73, 73);
   width: 100%;
   max-width: 800px;
   margin: 0;  /* changed from auto to 0 */
@@ -628,7 +628,7 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: rgb(139,0,0);
+  background: rgb(88, 73, 73);
   transition: var(--transition);
 }
 
